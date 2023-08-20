@@ -1,0 +1,10 @@
+{
+    "name": "Smart WhatsApp",
+    "description": "This plugin uses ChatGPT to give suggestions for a particular message.",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Smart WhatsApp"
+    }
+}
