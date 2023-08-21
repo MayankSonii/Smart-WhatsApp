@@ -3,9 +3,7 @@ import Greetings from './components/Greetings'
 
 const App = () => {
   return (
-    <>
-        <Greetings />
-    </>
+    <h1>Hello from React</h1>
   )
 }
 
