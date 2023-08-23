@@ -1,10 +1,13 @@
-import React from 'react'
-import Greetings from './components/Greetings'
+import React, { Suspense } from 'react'
+
+const Message = React.lazy(() => import('./components/Message'))
 
 const App = () => {
-  return (
-    <h1>Hello from React</h1>
-  )
+    return (
+        <Suspense fallback={'loading...'}>
+            <Message />
+        </Suspense>
+    )
 }
 
 export default App

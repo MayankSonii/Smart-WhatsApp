@@ -1,0 +1,14 @@
+#suggestion-box {
+    position: absolute;
+    display: none;
+    width: fit-content;
+    z-index: 9999;
+    padding: 2rem;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    background-color: black;
+    opacity: 1;
+    color: white;
+    font-size: 1em;
+}

@@ -6,5 +6,19 @@
     "action": {
         "default_popup": "index.html",
         "default_title": "Smart WhatsApp"
-    }
+    },
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://web.whatsapp.com/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["https://*.whatsapp.com/*"],
+            "js": ["contentScript.js"],
+            "css": ["utils.css"]
+        }
+    ]
 }
