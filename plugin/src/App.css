@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: whitesmoke;
+    background-color: #202c33;
+}
+
+.smart-spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12rem;
+    height: 4rem;
+}
+
+.smart-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+  .smart-spinner:after {
+    content: " ";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    margin: 2px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: smart-spinner 1.2s linear infinite;
+  }
+  @keyframes smart-spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

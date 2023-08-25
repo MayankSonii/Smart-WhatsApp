@@ -1,0 +1,86 @@
+.smart-settings-container {
+    display: flex;
+    flex-direction: column;
+    width: 12rem;
+    height: 10rem;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+}
+
+.smart-settings-container header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-weight: bold;
+}
+
+.smart-settings-container header span {
+    color: #00a884;
+}
+
+.smart-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#smart-toggle-label {
+    position: relative;
+    display: inline-block;
+    width: 2rem;
+    height: 1rem;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.308);
+}
+
+#smart-toggle-label::after {
+    content: '';
+    position: absolute;
+    top: 0.1rem;
+    left: 0.1rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background-color: whitesmoke;
+    transition: 0.2s ease;
+}
+
+#smart-toggle-button:checked + #smart-toggle-label:after {
+    translate: 1rem 0;
+}
+
+#smart-toggle-button:checked + #smart-toggle-label {
+    background-color: #00a884;;
+}
+
+#smart-toggle-button {
+    display: none;
+}
+
+.smart-settings-container section {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.smart-settings-container section div > span {
+    cursor: pointer;
+}
+
+input[type=number] {
+    outline: none;
+    border: none;
+    width: 30px;
+    text-align: center;
+}
+
+
+/* To remove the button from number type */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

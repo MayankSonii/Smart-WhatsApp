@@ -1,10 +1,20 @@
-import { showSuggestions, createSuggestionBox } from './utils'
-;(() => {
+import { showSuggestions, createSuggestionBox, getConfiguration } from './utils'
+;(async () => {
+    let { isEnabled, topP, temperature, nSuggestions } =
+    await getConfiguration()
+    
+    //listener for any changes in the local storage
+    chrome.storage.onChanged.addListener(async () => {
+        console.log('calling the listener');
+        ({ isEnabled, topP, temperature, nSuggestions } =
+            await getConfiguration())
+    })
+
     const interval = setInterval(() => {
         const chatSection = document.querySelector("[role='application']")
 
         if (chatSection) {
-            if(!chatSection.querySelector('#suggestion-box'))
+            if (!chatSection.querySelector('#suggestion-box'))
                 createSuggestionBox(chatSection)
 
             const spans = document.querySelectorAll('span.copyable-text')
@@ -29,12 +39,12 @@ import { showSuggestions, createSuggestionBox } from './utils'
                             // const result = await response.json()
                             // result.choices.forEach((choice) => suggestions.push(choice.message.content))
                             suggestions.push(span.innerText)
+                            suggestions.push(isEnabled)
+                            suggestions.push(temperature)
+                            suggestions.push(nSuggestions)
+                            suggestions.push(topP)
+
                             showSuggestions(suggestions)
-                            // const inputDiv = document.querySelectorAll(".lexical-rich-text-input")[1]
-                            // const inputP = inputDiv.querySelector('p')
-                            // const newText = document.createChild('span')
-                            // newText.innerText = span.innerText
-                            // inputP.appendChild(newText)
                         } catch (err) {
                             showSuggestions([err])
                         }

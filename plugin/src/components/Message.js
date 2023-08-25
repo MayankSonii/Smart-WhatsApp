@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getActiveTab } from '../utils/utils'
+import GotoMessage from './GotoMessage'
+import Settings from './Settings'
 
 const Message = () => {
     const [activeTab, setActiveTab] = useState(null)
@@ -14,9 +16,11 @@ const Message = () => {
     return (
         <div>
             {activeTab &&
-                (activeTab.url.includes('whatsapp.com')
-                    ? 'Welcome to Smart-WhatsApp'
-                    : 'Please visit WhatsApp Web to access this extension Visit Here https://web.whatsapp.com')}
+                (activeTab.url.includes('whatsapp.com') ? (
+                    <Settings />
+                ) : (
+                    <GotoMessage />
+                ))}
         </div>
     )
 }

@@ -16,6 +16,7 @@ const createSuggestionBoxHeader = () => {
     hideButton.id = 'suggestion-box-hide-button'
     heading.innerText = 'Smart Suggestions'
     hideButton.innerText = 'X'
+    hideButton.style.cursor = 'pointer'
 
     hideButton.onclick = () => {
         suggestionBoxHeader.parentElement.style.display = 'none'
@@ -36,7 +37,7 @@ export const createSuggestionBox = (DOMElement) => {
     showButton.id = 'suggestion-box-show-button'
 
     showButton.innerText = 'AI'
-    
+
     showButton.onclick = () => {
         showButton.style.display = 'none'
         suggestionBox.style.display = 'flex'
@@ -55,7 +56,34 @@ export const showSuggestions = (suggestions) => {
     suggestions.forEach((suggestion) => {
         const p = document.createElement('p')
         p.innerText = suggestion
+        p.onclick = async () => {
+            await navigator.clipboard.writeText(p.innerText)
+            suggestionBox.style.display = 'none'
+
+            const toast = document.createElement('div')
+            toast.id = 'suggestion-box-toast'
+            toast.innerText = 'Successfully copied the suggestion to the clipboard'
+            suggestionBox.parentElement.appendChild(toast)
+
+            setTimeout(() => {
+                suggestionBox.parentElement.removeChild(toast)
+            }, 4000)
+        }
         suggestionBox.appendChild(p)
     })
     suggestionBox.style.display = 'flex'
+}
+
+export const getConfiguration = async () => {
+    const isEnabled = await chrome.storage.local.get(['isEnabled'])
+    const temperature = await chrome.storage.local.get(['temperature'])
+    const nSuggestions = await chrome.storage.local.get(['suggestions'])
+    const topP = await chrome.storage.local.get(['topP'])
+
+    return {
+        isEnabled: isEnabled.isEnabled,
+        temperature: temperature.temperature,
+        nSuggestions: nSuggestions.suggestions,
+        topP: topP.topP,
+    }
 }
