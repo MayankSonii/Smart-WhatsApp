@@ -93,7 +93,7 @@ export const showSuggestions = (suggestions) => {
             const toast = document.createElement('div')
             toast.id = 'suggestion-box-toast'
             toast.innerText =
-                'Successfully copied the suggestion to the clipboard'
+                'Successfully copied to the clipboard'
             suggestionBox.parentElement.appendChild(toast)
 
             setTimeout(() => {

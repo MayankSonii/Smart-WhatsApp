@@ -2,9 +2,15 @@ import React from 'react'
 import './css/GotoMessage.css'
 const GotoMessage = () => {
     return (
-        <div className='smart-goto-message-container'>
+        <div className="smart-goto-message-container">
             Visit WhatsApp Web to access this extension
-            <a href="https://web.whatsapp.com">Here</a>
+            <button
+                onClick={() =>
+                    window.open('https://web.whatsapp.com', '_blank')
+                }
+            >
+                Here
+            </button>
         </div>
     )
 }

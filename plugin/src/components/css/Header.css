@@ -1,0 +1,24 @@
+.smart-header-container {
+    display: flex;
+    padding: 0.25em;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0b0b0b;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.smart-header-container span {
+    background-color: #0b0b0b;
+    color: #00a884;
+}
+
+.smart-header-container button {
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #0b0b0b;
+    transition: 0.2s ease;
+}
