@@ -26,5 +26,11 @@
             "js": ["contentScript.js"],
             "css": ["utils.css"]
         }
+    ],
+    "web_accessible_resources": [
+        {
+            "matches": ["https://*.whatsapp.com/*"],
+            "resources": ["assets/icon32.png"]
+        }
     ]
 }
