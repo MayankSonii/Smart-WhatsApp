@@ -1,0 +1,38 @@
+.smart-settings-container {
+    display: flex;
+    flex-direction: column;
+    width: 12rem;
+    height: 10rem;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+}
+
+.smart-settings-container section {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+    text-transform: capitalize;
+}
+
+.smart-settings-container section div > span {
+    font-size: 1em;
+    cursor: pointer;
+}
+
+input[type=number] {
+    outline: none;
+    border: none;
+    width: 30px;
+    text-align: center;
+}
+
+
+/* To remove the button from number type */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

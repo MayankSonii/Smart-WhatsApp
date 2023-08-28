@@ -4,14 +4,16 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     mode: 'development',
-
+    devtool: false,
     entry: {
         main: './src/index.js',
+        contentScript: './src/utils/contentScript.js'
     },
 
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'build'),
+        clean: true
     },
 
     module: {
@@ -26,6 +28,10 @@ module.exports = {
                     },
                 },
             },
+            {
+                test: /\.css/,
+                use: ['style-loader', 'css-loader']
+            }
         ],
     },
 
@@ -39,6 +45,14 @@ module.exports = {
                 {
                     from: path.resolve(__dirname, 'public', 'manifest.json'),
                     to: path.resolve(__dirname, 'build'),
+                },
+                {
+                    from: path.resolve(__dirname, 'src', 'utils', 'utils.css'),
+                    to: path.resolve(__dirname, 'build'),
+                },
+                {
+                    from: path.resolve(__dirname, 'public', 'assets'),
+                    to: path.resolve(__dirname, 'build', 'assets'),
                 },
             ],
         }),

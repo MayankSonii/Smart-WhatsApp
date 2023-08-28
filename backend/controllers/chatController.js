@@ -2,7 +2,7 @@ import OpenAI from 'openai'
 
 export const sendUserResponse = async (req, res) => {
     try {
-        const { userMessage } = req.body
+        const { userMessage, n, temperature, topP } = req.body
         const openai = new OpenAI({
             apiKey: process.env.API_KEY,
         })
@@ -10,8 +10,9 @@ export const sendUserResponse = async (req, res) => {
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo-0613',
             messages: [{ role: 'user', content: userMessage }],
-            n: 2,
-            temperature: 0.7
+            n,
+            temperature,
+            top_p: topP
         })
 
         res.json(response)
