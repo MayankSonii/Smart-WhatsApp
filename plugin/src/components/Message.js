@@ -15,6 +15,7 @@ const Message = () => {
 
     return (
         <div>
+            {/* checks if the current tab is of WhatsApp web or not */}
             {activeTab &&
                 (activeTab.url.includes('whatsapp.com') ? (
                     <Settings />

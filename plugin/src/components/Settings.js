@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { FcSettings } from 'react-icons/fc'
 import ConfigurableElement from './ConfigurableElement'
-import EnableButton from './EnableButton' 
+import EnableButton from './EnableButton'
 import './css/Settings.css'
 
+// function to get the configurations from local storage
 const getConfiguration = async (config, setter, defaultValue) => {
     const result = await chrome.storage.local.get([`${config}`])
     let value = null
@@ -13,6 +15,7 @@ const getConfiguration = async (config, setter, defaultValue) => {
     else setter(value)
 }
 
+// function to set the configurations in local storage
 const setConfiguration = (config, setter, value) => {
     setter(value)
     chrome.storage.local.set({
@@ -42,39 +45,43 @@ const Settings = () => {
                 setter={setIsEnabled}
                 setConfig={setConfiguration}
             />
+            <div className="smart-configuration-list">
+                <span>
+                    <FcSettings /> Configuration
+                </span>
+                <ConfigurableElement
+                    configName="suggestions"
+                    configState={suggestions}
+                    minValue={0}
+                    maxValue={4}
+                    step={1}
+                    setConfig={setConfiguration}
+                    setter={setSuggestions}
+                    description="No. of suggestions"
+                />
 
-            <ConfigurableElement
-                configName="suggestions"
-                configState={suggestions}
-                minValue={0}
-                maxValue={4}
-                step={1}
-                setConfig={setConfiguration}
-                setter={setSuggestions}
-                description="No. of suggestions"
-            />
+                <ConfigurableElement
+                    configName="temperature"
+                    configState={temperature}
+                    minValue={0}
+                    maxValue={1}
+                    step={0.1}
+                    setConfig={setConfiguration}
+                    setter={setTemperature}
+                    description="Randomness of the suggestions"
+                />
 
-            <ConfigurableElement
-                configName="temperature"
-                configState={temperature}
-                minValue={0}
-                maxValue={2}
-                step={0.1}
-                setConfig={setConfiguration}
-                setter={setTemperature}
-                description="Randomness of the suggestions"
-            />
-
-            <ConfigurableElement
-                configName="topP"
-                configState={topP}
-                minValue={0}
-                maxValue={1}
-                step={0.1}
-                setConfig={setConfiguration}
-                setter={setTopP}
-                description="Top probability of the suggestions"
-            />
+                <ConfigurableElement
+                    configName="topP"
+                    configState={topP}
+                    minValue={0}
+                    maxValue={1}
+                    step={0.1}
+                    setConfig={setConfiguration}
+                    setter={setTopP}
+                    description="Top probability of the suggestions"
+                />
+            </div>
         </div>
     )
 }

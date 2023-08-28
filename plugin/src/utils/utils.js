@@ -1,3 +1,4 @@
+// function to get the current tab information using chrom.tabs API
 export const getActiveTab = async () => {
     const [tab] = await chrome.tabs.query({
         active: true,
@@ -6,6 +7,7 @@ export const getActiveTab = async () => {
     return tab
 }
 
+// function to create a spinner which is shown when the suggestions are being loaded in the suggestion box
 export const createSpinner = () => {
     const suggestionBox = document.getElementById('suggestion-box')
     const showButton = document.getElementById('suggestion-box-show-button')
@@ -24,6 +26,7 @@ export const createSpinner = () => {
     suggestionBox.appendChild(spinnerContainer)
 }
 
+// function to remove the spinner when the suggestions are loaded
 export const removeSpinner = () => {
     console.log('calling remove spinner')
     const suggestionBox = document.getElementById('suggestion-box')
@@ -31,6 +34,7 @@ export const removeSpinner = () => {
     suggestionBox.removeChild(spinnerContainer)
 }
 
+// funtion to create suggestion box header
 const createSuggestionBoxHeader = () => {
     const suggestionBoxHeader = document.createElement('section')
     const heading = document.createElement('span')
@@ -43,6 +47,7 @@ const createSuggestionBoxHeader = () => {
     hideButton.innerText = 'X'
     hideButton.style.cursor = 'pointer'
 
+    //click handler which hides the suggestion box and shows the show button
     hideButton.onclick = () => {
         suggestionBoxHeader.parentElement.style.display = 'none'
         showButton.style.display = 'flex'
@@ -54,7 +59,8 @@ const createSuggestionBoxHeader = () => {
     return suggestionBoxHeader
 }
 
-export const createSuggestionBox = (DOMElement) => {
+// function to create the suggestion box and show button
+export const createSuggestionBox = async (DOMElement) => {
     const suggestionBox = document.createElement('div')
     const showButton = document.createElement('button')
     const icon = document.createElement('img')
@@ -62,9 +68,11 @@ export const createSuggestionBox = (DOMElement) => {
     suggestionBox.id = 'suggestion-box'
     showButton.id = 'suggestion-box-show-button'
     icon.alt = 'AI'
-    icon.src = chrome.runtime.getURL('assets/icon32.png')
 
-    
+    //Accessing the asset from plugin folder to the current website
+    icon.src = await chrome.runtime.getURL('assets/icon32.png')
+
+    // click handler which hides the show button and shows the suggestion box
     showButton.onclick = () => {
         showButton.style.display = 'none'
         suggestionBox.style.display = 'flex'
@@ -76,6 +84,7 @@ export const createSuggestionBox = (DOMElement) => {
     DOMElement.appendChild(showButton)
 }
 
+// function to populate the suggestion box with suggestions or error if any
 export const showSuggestions = (suggestions) => {
     const suggestionBox = document.getElementById('suggestion-box')
     const showButton = document.getElementById('suggestion-box-show-button')
@@ -85,6 +94,9 @@ export const showSuggestions = (suggestions) => {
     suggestions.forEach((suggestion) => {
         const p = document.createElement('p')
         p.innerText = suggestion
+
+        // click handler for each suggestion in the suggestion box 
+        // copies the suggestion in the clipboard
         p.onclick = async () => {
             await navigator.clipboard.writeText(p.innerText)
             suggestionBox.style.display = 'none'
@@ -106,6 +118,7 @@ export const showSuggestions = (suggestions) => {
     // showButton.style.display = 'none'
 }
 
+// funtion to return the configutations in the plugin local storage
 export const getConfiguration = async () => {
     const isEnabled = await chrome.storage.local.get(['isEnabled'])
     const temperature = await chrome.storage.local.get(['temperature'])
@@ -120,15 +133,19 @@ export const getConfiguration = async () => {
     }
 }
 
+
+// function to transform the suggestions so as to save them in the local storage
 export const transformText = (text) => {
     const punctuations = /[?.,\/#!$%\^&\*;:{}=\-_`~()]/
     const textArray = [...text]
     let transformedText = ''
 
+    // removes any punctuation from the text
     textArray.forEach(char => {
         if(!punctuations.test(char))
             transformedText += char
     })
 
+    // returns the text in all lower case
     return transformedText.toLowerCase().replace(/ +/g, ' ')
 }

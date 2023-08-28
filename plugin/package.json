@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode development --devtool false",
+    "prod": "webpack --mode production",
     "start": "webpack-dev-server --port 3000 --open"
   },
   "author": "",

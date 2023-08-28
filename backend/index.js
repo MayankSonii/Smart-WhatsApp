@@ -9,6 +9,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+//sending the requests for /v1/chat to chatRoute
 app.use('/v1/chat', chatRoute)
 
 const PORT = process.env.PORT

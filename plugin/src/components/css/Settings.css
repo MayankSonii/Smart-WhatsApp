@@ -2,10 +2,27 @@
     display: flex;
     flex-direction: column;
     width: 12rem;
-    height: 10rem;
+    height: 14rem;
     justify-content: space-between;
     padding: 1rem;
     align-items: center;
+}
+
+.smart-configuration-list {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 0.5em;
+    border: 1px solid #ffffff1a;
+    border-radius: 10px;
+}
+
+.smart-configuration-list > span {
+    position: relative;
+    top: -20px;
+    left: -25px;
 }
 
 .smart-settings-container section {
@@ -13,8 +30,15 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    font-size: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85em;
     text-transform: capitalize;
+    margin-bottom: 1.5em;
+}
+
+.smart-settings-container section:last-child {
+    margin-bottom: 0;
 }
 
 .smart-settings-container section div > span {

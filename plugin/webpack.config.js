@@ -3,8 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-    mode: 'development',
-    devtool: false,
     entry: {
         main: './src/index.js',
         contentScript: './src/utils/contentScript.js'
